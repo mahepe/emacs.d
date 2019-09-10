@@ -105,7 +105,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
+    (highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -117,3 +117,15 @@
 (tool-bar-mode -1) 
 (toggle-scroll-bar -1) 
 
+(require 'projectile)
+(setq projectile-indexing-method 'alien)
+
+(counsel-projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;; (Define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; Show Paren
+(require 'paren)
+(setq show-paren-delay 0)
+(show-paren-mode 1)                     ; highlight matching parentheses

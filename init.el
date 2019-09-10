@@ -129,7 +129,6 @@
 (require 'paren)
 (setq show-paren-delay 0)
 (show-paren-mode 1)                     ; highlight matching parentheses
-(electric-indent-mode -1)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -159,4 +158,4 @@
   (setq web-mode-markup-indent-offset 2)
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
-
+(setq-default electric-indent-inhibit t)

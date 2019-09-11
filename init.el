@@ -63,7 +63,8 @@
 (require 'magit)
 (setq inhibit-startup-screen t)
 (define-key keys-mode-map (kbd "C-c m") 'magit-status)
-(setq mac-command-modifier 'meta)
+(setq mac-command-modifier 'meta
+      mac-option-modifier nil)
 
 (when (>= emacs-major-version 24)
   (add-to-list
@@ -93,7 +94,6 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
-(set-face-attribute 'default nil :font "Monaco-14" )
 
 (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance)
 (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat)
@@ -105,7 +105,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
+    (atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -129,6 +129,7 @@
 (require 'paren)
 (setq show-paren-delay 0)
 (show-paren-mode 1)                     ; highlight matching parentheses
+(setq ensime-startup-notification nil)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -159,3 +160,13 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 (setq-default electric-indent-inhibit t)
+
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "Hack"
+                    :height 130
+                    :weight 'normal
+                    :width 'normal)
+
+(require 'atom-one-dark-theme)
+(load-theme 'atom-one-dark t)

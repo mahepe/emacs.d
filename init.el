@@ -105,13 +105,14 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
+    (ace-window atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(magit-diff-added ((t (:foreground "#149914" :background nil :inherit nil))))
+ '(magit-diff-removed ((t (:foreground "#991414" :background nil :inherit nil)))))
 
 (menu-bar-mode -1) 
 (tool-bar-mode -1) 
@@ -170,3 +171,34 @@
 
 (require 'atom-one-dark-theme)
 (load-theme 'atom-one-dark t)
+
+
+
+;;; see https://github.com/magit/magit/issues/1884#issuecomment-106803577
+  
+(defun magit-section-highlight-less (section _)
+  (magit-section-case
+    ((untracked unstaged staged unpushed unpulled hunk file)
+     ;; ^ You will likely have to add more here,
+     ;; `magit-describe-section' is your friend.
+  )))
+
+(add-hook 'magit-section-highlight-hook 'magit-section-highlight-less)
+
+(require 'ace-window)
+(setq aw-background nil)
+(setq aw-dispatch-alist
+      '((?1 delete-other-windows " Ace - Maximize Window")
+        (?2 aw-split-window-vert " Ace - Split Vert Window")
+        (?3 aw-split-window-horz " Ace - Split Horz Window")
+        (?k aw-delete-window " Ace - Delete Window")
+        (?s aw-swap-window " Ace - Swap Window")
+        (?m aw-move-window " Ace - Move Window")
+        (?n aw-flip-window)))
+(setq aw-leading-char-style 'path)
+(setq aw-keys '(?h ?t ?u ?e))
+(setq aw-scope 'frame)
+
+;; Ace-Window
+(define-key keys-mode-map (kbd "C-x o") 'ace-window)
+(setq echo-keystrokes 0.1)              ; immediately show typed keys

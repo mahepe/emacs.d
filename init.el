@@ -210,10 +210,11 @@
 (defun new-make ()
   (interactive)
   (select-frame (make-frame))
-  (funcall #toggle-frame-fullscreen)
+  (funcall #'toggle-frame-fullscreen)
   )
 
 (define-key keys-mode-map (kbd "M-<right>") 'other-frame)
 (define-key keys-mode-map (kbd "M-<left>") 'back-frame)
 (define-key keys-mode-map (kbd "M-<up>") 'new-make)
 (define-key keys-mode-map (kbd "M-<down>") 'delete-frame)
+(toggle-frame-fullscreen)

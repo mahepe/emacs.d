@@ -10,6 +10,7 @@
   "Separate packages directory.")
 (defvar site-lisp-dir (expand-file-name "site-lisp" emacs-dir)
   "Site-lisp directory.")
+(setq backup-directory-alist `(("." . "~/.saves")))
 
 (unless (file-exists-p cache-dir)
   (make-directory cache-dir t))
@@ -211,10 +212,11 @@
   (interactive)
   (select-frame (make-frame))
   (funcall #'toggle-frame-fullscreen)
+  (toggle-scroll-bar -1)
   )
 
 (define-key keys-mode-map (kbd "M-<right>") 'other-frame)
 (define-key keys-mode-map (kbd "M-<left>") 'back-frame)
 (define-key keys-mode-map (kbd "M-<up>") 'new-make)
 (define-key keys-mode-map (kbd "M-<down>") 'delete-frame)
-(toggle-frame-fullscreen)
+(global-linum-mode t)

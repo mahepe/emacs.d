@@ -106,7 +106,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (ace-window atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
+    (markdown-mode yaml-mode dockerfile-mode ace-window atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -215,8 +215,46 @@
   (toggle-scroll-bar -1)
   )
 
-(define-key keys-mode-map (kbd "M-<right>") 'other-frame)
-(define-key keys-mode-map (kbd "M-<left>") 'back-frame)
-(define-key keys-mode-map (kbd "M-<up>") 'new-make)
-(define-key keys-mode-map (kbd "M-<down>") 'delete-frame)
+(global-set-key (kbd "M-<right>") 'other-frame)
+(global-set-key (kbd "M-<left>") 'back-frame)
+(global-set-key (kbd "M-<up>") 'new-make)
+(global-set-key (kbd "M-<down>") 'delete-frame)
 (global-linum-mode t)
+
+;;(global-set-key (kbd "<M-up>") 'shrink-window)
+;;(global-set-key (kbd "<M-down>") 'enlarge-window)
+;;(global-set-key (kbd "<M-left>") 'shrink-window-horizontally)
+;;(global-set-key (kbd "<M-right>") 'enlarge-window-horizontally)
+
+(defun shrink_y ()
+  (interactive)
+  (cl-loop repeat 5 do (call-interactively 'shrink-window))
+  )
+
+(defun enlarge_y ()
+  (interactive)
+  (cl-loop repeat 5 do (call-interactively 'enlarge-window))
+  )
+
+(defun shrink_x ()
+  (interactive)
+  (cl-loop repeat 5 do (call-interactively 'shrink-window-horizontally))
+  )
+
+(defun enlarge_x ()
+  (interactive)
+  (cl-loop repeat 5 do (call-interactively 'enlarge-window-horizontally))
+  )
+
+
+(define-minor-mode quickresize-mode
+  :global 1
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "<M-up>") 'shrink_y)
+            (define-key map (kbd "<M-down>") 'enlarge_y)
+            (define-key map (kbd "<M-left>") 'shrink_x)
+            (define-key map (kbd "<M-right>") 'enlarge_x)
+            map))
+
+(define-key keys-mode-map (kbd "C-c r") 'quickresize-mode)
+(quickresize-mode -1)

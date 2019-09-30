@@ -10,7 +10,13 @@
   "Separate packages directory.")
 (defvar site-lisp-dir (expand-file-name "site-lisp" emacs-dir)
   "Site-lisp directory.")
-(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-directory-alist
+	`(("." . ,(concat user-emacs-directory "backups"))))
+(setq auto-save-file-name-transforms
+  `((".*" "~/.emacs-saves/" t)))
+
+
+
 
 (unless (file-exists-p cache-dir)
   (make-directory cache-dir t))
@@ -221,10 +227,6 @@
 (global-set-key (kbd "M-<down>") 'delete-frame)
 (global-linum-mode t)
 
-;;(global-set-key (kbd "<M-up>") 'shrink-window)
-;;(global-set-key (kbd "<M-down>") 'enlarge-window)
-;;(global-set-key (kbd "<M-left>") 'shrink-window-horizontally)
-;;(global-set-key (kbd "<M-right>") 'enlarge-window-horizontally)
 
 (defun shrink_y ()
   (interactive)
@@ -257,4 +259,6 @@
             map))
 
 (define-key keys-mode-map (kbd "C-c r") 'quickresize-mode)
-(quickresize-mode -1)
+(define-key keys-mode-map (kbd "C-x k") 'kill-this-buffer)
+(setq column-number-mode t)
+(setq-default quickresize-mode nil)

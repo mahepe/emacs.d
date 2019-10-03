@@ -262,3 +262,4 @@
 (define-key keys-mode-map (kbd "C-x k") 'kill-this-buffer)
 (setq column-number-mode t)
 (setq-default quickresize-mode nil)
+(setq-default winner-mode t)

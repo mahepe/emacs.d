@@ -112,7 +112,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (markdown-mode yaml-mode dockerfile-mode ace-window atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
+    (kotlin-mode haskell-mode markdown-mode yaml-mode dockerfile-mode ace-window atom-one-dark-theme atom-dark-theme doom-themes ensime web-mode highlight-parentheses counsel-projectile flycheck keystore-mode ## helm-projectile helm-descbinds zenburn-theme magit helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -263,3 +263,4 @@
 (setq column-number-mode t)
 (setq-default quickresize-mode nil)
 (setq-default winner-mode t)
+(define-key keys-mode-map (kbd "C-:") 'avy-goto-char)
